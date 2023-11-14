@@ -1,0 +1,15 @@
+F:\Projec\doan\doAn3\bin\Debug\doAn3.exe.config
+F:\Projec\doan\doAn3\bin\Debug\doAn3.exe
+F:\Projec\doan\doAn3\bin\Debug\doAn3.pdb
+F:\Projec\doan\doAn3\obj\Debug\doAn3.csproj.AssemblyReference.cache
+F:\Projec\doan\doAn3\obj\Debug\doAn3.csproj.CoreCompileInputs.cache
+F:\Projec\doan\doAn3\obj\Debug\doAn3.exe
+F:\Projec\doan\doAn3\obj\Debug\doAn3.pdb
+C:\vu\it\DoAN\doAn3\bin\Debug\doAn3.exe.config
+C:\vu\it\DoAN\doAn3\bin\Debug\doAn3.exe
+C:\vu\it\DoAN\doAn3\bin\Debug\doAn3.pdb
+C:\vu\it\DoAN\doAn3\obj\Debug\doAn3.csproj.AssemblyReference.cache
+C:\vu\it\DoAN\doAn3\obj\Debug\doAn3.csproj.SuggestedBindingRedirects.cache
+C:\vu\it\DoAN\doAn3\obj\Debug\doAn3.csproj.CoreCompileInputs.cache
+C:\vu\it\DoAN\doAn3\obj\Debug\doAn3.exe
+C:\vu\it\DoAN\doAn3\obj\Debug\doAn3.pdb

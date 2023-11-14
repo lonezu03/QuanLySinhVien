@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33214.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "doAn3", "doAn3.csproj", "{28BC4776-7AE1-4EED-9634-F22F86C53045}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73C64AB3-2372-4287-BB7E-59A4B50FAD06}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28BC4776-7AE1-4EED-9634-F22F86C53045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28BC4776-7AE1-4EED-9634-F22F86C53045}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28BC4776-7AE1-4EED-9634-F22F86C53045}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28BC4776-7AE1-4EED-9634-F22F86C53045}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {58A2B61C-D443-499D-9AB3-B5E581A4552C}
+	EndGlobalSection
+EndGlobal
