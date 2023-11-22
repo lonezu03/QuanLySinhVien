@@ -20,22 +20,20 @@ namespace doAn3
 
             do
             {
-                Console.WriteLine("***********************************************************************************************************");
-                Console.Write("\nChọn menu !!!!");
-                Console.Write("\n1.Thêm sinh viên vào danh sách");
-                Console.Write("\n2.Thêm nhiều sinh viên vào danh sách");
-                Console.Write("\n3.Xem danh sách sinh viên");
-                Console.Write("\n4.Lưu Danh sách sinh viên vào file");
-                Console.Write("\n5.Mở danh sách sinh viên từ file");
-                Console.Write("\n6.Xóa sinh viên khỏi danh sách");
-                Console.Write("\n7.Hoàn tác vụ vừa dùng ");
-                Console.Write("\n8.Lọc danh sách sinh viên theo khoa");
-                Console.Write("\n9.Lọc danh sách sinh viên đủ điều kiện tốt nghiệp");
-                Console.Write("\n10.Sắp xếp danh sách sinh viên theo mã sinh viên(bubble sort)");
-                Console.Write("\n11.Sắp xếp danh sách sinh viên theo mã sinh viên(quick sort)");
-                Console.Write("\n12.Sắp xếp danh sách sinh viên theo mã sinh viên(heap sort)");
+                Console.WriteLine(new string('-', 103));
+                Console.Write(new string('-', 39));
+                Console.Write("MENU");
+                Console.WriteLine(new string('-', 60));
+                Console.WriteLine("|{0,-40}|{1,-60}|", "1.Thêm sinh viên", "7.Hoàn tác vụ");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "2.Thêm nhiều sinh viên", "8.Lọc sinh viên theo lớp");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "3.Xem danh sách sinh viên", "9.xếp sinh viên đủ điều kiện tốt nghiệp)");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "4.Lưu file!!", "10.Sắp xếp tăng dần theo MSSV(Bubble sort)");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "5.Đọc file", "11.Sắp xếp tăng dần theo MSSV(quick sort)");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "6.Xóa sinh viên khỏi danh sách sinh viên", "12.Sắp xếp tăng dần theo MSSV(heap sort)");
 
-                Console.Write("\nNhập -999 để thoát menu: ");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "", "15.Thoát menu");
+                Console.WriteLine(new string('-', 103));
+                //Console.WriteLine("13.Độ dài của danh sách: ");
                 Console.Write("\nNhap lựu chọn: ");
                 int pre = 0;
                 if (chon != 0)
@@ -46,16 +44,9 @@ namespace doAn3
                 {
                     case 1:
                         {
-                            char a= 'A';
                             ds.themSV(ds);
                             ds.xuatDS();
-                            do
-                            {
-                                Console.Write("\nBạn có muốn lưu không ('y'xác nhận 'n' không): ");
-                                a = char.Parse(Console.ReadLine());
-                                if (a == 'n')
-                                    break ;
-                            } while (a != 'y');
+                           
                             ds.luuFile("doc.txt",ds);
                             break;
                         };
@@ -83,16 +74,11 @@ namespace doAn3
                         };
                     case 6:
                         {
-                            char a='a';
+                   
                             ds.Remove();
-                            do
-                            {
-                                Console.Write("\nBạn có muốn lưu không ('y'xác nhận 'n' không): ");
-                                a = char.Parse(Console.ReadLine());
-                                if (a == 'n')
-                                    break;
-                            } while (a != 'y');
+       
                             ds.luuFile("doc.txt", ds);
+                           
                             break;
                         };
                     case 7:
@@ -152,7 +138,7 @@ namespace doAn3
                     default:
                         break;
                 }
-            } while (chon != -999);
+            } while (chon != 15);
         }
     }
 }

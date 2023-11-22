@@ -262,18 +262,30 @@ namespace doAn3
         {
             using (StreamWriter a = new StreamWriter(filename))
             {
-                var p = ds.Header;
-                while (p != null)
+                char b = 'A';
+                do
                 {
-                    a.WriteLine(p.Data.IdSV);
-                    a.WriteLine(p.Data.NameSV);
-                    a.WriteLine(p.Data.Lop);
-                    a.WriteLine(p.Data.NgayCTXH);
-                    a.WriteLine(p.Data.TinChi);
-                    a.WriteLine(p.Data.DiemLyThuyet);
-                    a.WriteLine(p.Data.DiemThucHanh);
-                    p = p.Next;
-                }
+                    Console.Write("\nBạn có muốn lưu không ('y'xác nhận 'n' không): ");
+                    b = char.Parse(Console.ReadLine());
+                    if (b == 'y')
+                    {
+                        var p = ds.Header;
+                        while (p != null)
+                        {
+                            a.WriteLine(p.Data.IdSV);
+                            a.WriteLine(p.Data.NameSV);
+                            a.WriteLine(p.Data.Lop);
+                            a.WriteLine(p.Data.NgayCTXH);
+                            a.WriteLine(p.Data.TinChi);
+                            a.WriteLine(p.Data.DiemLyThuyet);
+                            a.WriteLine(p.Data.DiemThucHanh);
+                            p = p.Next;
+                        }
+                        Console.WriteLine("\nLưu file thành công");
+                        return;
+                    }
+                } while (b != 'n');
+                
             }
         }
         public void DocFile(string fileName, taoList<doAn3.sinhvien> ds)
@@ -445,30 +457,59 @@ namespace doAn3
                 list.Data = data;
             }
         }
-
         private Node<doAn3.sinhvien> ConcatenateLists(Node<doAn3.sinhvien> a, Node<doAn3.sinhvien> b, Node<doAn3.sinhvien> c)
         {
-            var head = a;
-            var tail = a;
+            if (a.Data == null && b.Data == null && c.Data == null)
+            {
+                return null;
+            }
+            if (a.Data == null)
+            {
+                if (b.Data == null && c.Data == null)
+                {
+                    return null;
+                }
+                if (b.Data == null)
+                {
+                    return c;
+                }
+                if (c.Data == null)
+                {
+                    return b;
+                }
+                Node<doAn3.sinhvien> temp = b;
+                while (temp.Next != null)
+                {
+                    temp = temp.Next;
+                }
+                temp.Next = c;
+                return b;
+            }
+            Node<doAn3.sinhvien> tail = a;
             while (tail.Next != null)
             {
                 tail = tail.Next;
             }
-            tail.Next = b;
-            tail = b;
-            while (tail.Next != null)
+            if (b.Data != null)
             {
-                tail = tail.Next;
+                tail.Next = b;
+                while (tail.Next != null)
+                {
+                    tail = tail.Next;
+                }
             }
-            tail.Next = c;
-            return head;
+            if (c.Data != null)
+            {
+                tail.Next = c;
+            }
+            return a;
         }
-    
+       
 
 
 
 
-    public int Length()
+        public int Length()
         {
             int de = 0;
             var p = Header;
@@ -536,8 +577,6 @@ namespace doAn3
                 Heapify(length, largest);
             }
         }
-
-
         private Node<doAn3.sinhvien> FindNodeAtIndex(int index)
         {
             var current = Header;
@@ -547,9 +586,6 @@ namespace doAn3
             }
             return current;
         }
-
-
-
         private void Swap(Node<doAn3.sinhvien> a, Node<doAn3.sinhvien> b)
         {
             doAn3.sinhvien temp = a.Data;

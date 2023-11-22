@@ -13,3 +13,10 @@ C:\vu\it\DoAN\doAn3\obj\Debug\doAn3.csproj.SuggestedBindingRedirects.cache
 C:\vu\it\DoAN\doAn3\obj\Debug\doAn3.csproj.CoreCompileInputs.cache
 C:\vu\it\DoAN\doAn3\obj\Debug\doAn3.exe
 C:\vu\it\DoAN\doAn3\obj\Debug\doAn3.pdb
+F:\Projec\github\QuanLySinhVien\bin\Debug\doAn3.exe.config
+F:\Projec\github\QuanLySinhVien\bin\Debug\doAn3.exe
+F:\Projec\github\QuanLySinhVien\bin\Debug\doAn3.pdb
+F:\Projec\github\QuanLySinhVien\obj\Debug\doAn3.csproj.AssemblyReference.cache
+F:\Projec\github\QuanLySinhVien\obj\Debug\doAn3.csproj.CoreCompileInputs.cache
+F:\Projec\github\QuanLySinhVien\obj\Debug\doAn3.exe
+F:\Projec\github\QuanLySinhVien\obj\Debug\doAn3.pdb
