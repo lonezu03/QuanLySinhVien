@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace doAn3
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
-            var ds = new taoList();
+            var ds = new List();
             ds.Header = null;
             int chon = 0;
             var SVtmp = new sinhvien();
@@ -24,14 +25,11 @@ namespace doAn3
                 Console.Write(new string('-', 39));
                 Console.Write("MENU");
                 Console.WriteLine(new string('-', 60));
-                Console.WriteLine("|{0,-40}|{1,-60}|", "1.Thêm sinh viên", "7.Hoàn tác vụ");
-                Console.WriteLine("|{0,-40}|{1,-60}|", "2.Thêm nhiều sinh viên", "8.Lọc sinh viên theo lớp");
-                Console.WriteLine("|{0,-40}|{1,-60}|", "3.Xem danh sách sinh viên", "9.xếp sinh viên đủ điều kiện tốt nghiệp)");
-                Console.WriteLine("|{0,-40}|{1,-60}|", "4.Lưu file!!", "10.Sắp xếp tăng dần theo MSSV(Bubble sort)");
-                Console.WriteLine("|{0,-40}|{1,-60}|", "5.Đọc file", "11.Sắp xếp tăng dần theo MSSV(quick sort)");
-                Console.WriteLine("|{0,-40}|{1,-60}|", "6.Xóa sinh viên khỏi danh sách sinh viên", "12.Sắp xếp tăng dần theo MSSV(heap sort)");
-
-                Console.WriteLine("|{0,-40}|{1,-60}|", "", "15.Thoát menu");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "1.Thêm sinh viên", "6.Tìm kiếm sinh viên bằng mssv");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "2.Thêm nhiều sinh viên", "7.Lọc danh sách sinh viên");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "3.Xem danh sách sinh viên", "8.Sắp xếp tăng dần theo MSSV(Bubble sort)");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "4.Lưu file!!", "9.Thoát menu");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "5.Xóa sinh viên khỏi danh sách sinh viên", "");
                 Console.WriteLine(new string('-', 103));
                 //Console.WriteLine("13.Độ dài của danh sách: ");
                 Console.Write("\nNhap lựu chọn: ");
@@ -45,9 +43,8 @@ namespace doAn3
                     case 1:
                         {
                             ds.themSV();
+                            ds.xuatSV(ds.Header.Data);
                             ds.xuatDS();
-                           
-                            ds.luuFile("doc.txt",ds);
                             break;
                         };
                     case 2:
@@ -62,83 +59,71 @@ namespace doAn3
                         };
                     case 4:
                         {
-                            ds.luuFile("doc.txt", ds);
+                            ds.luuFile("doc.txt", ds.Header);
                             break;
                         };
                     case 5:
                         {
-                            ds.DocFile("doc.txt", ds);
-                            Console.WriteLine("\nDanh sách sinh viên sau khi đọc file là: ");
-                            ds.xuatDS();
+                            ds.Remove();
+                            ds.luuFile("doc.txt", ds.Header);
                             break;
                         };
                     case 6:
                         {
-                   
-                            ds.Remove();
-       
-                            ds.luuFile("doc.txt", ds);
-                           
+                            
+                            Node sv=ds.timsv();
+                            if (sv == null)
+                                Console.WriteLine("\nDanh sách không có sinh viên mà bạn cần tìm");
+                            else {
+                                Console.WriteLine("\nSinh Viên bạn cần tìm là: ");
+                                ds.xuatSV(sv.Data);
+                            }
                             break;
                         };
                     case 7:
                         {
-                            if (pre == 1)
-                            {
-                                ds.backThem();
-                                Console.WriteLine("\nDanh sách sau khi hoàn tác là: !!!");
-                                ds.xuatDS();
-                            }
-                            else if (pre == 6)
-                            {
-                                ds.backXoa();
-                                Console.WriteLine("\nDanh sách sau khi hoàn tác là: !!!");
-                                ds.xuatDS();
-                            }
-                            else
-                                Console.WriteLine("\nLưu ý chỉ được hoàn tác sau khi đã thêm hoặc xóa !!!");
+                            ds.locSinhVienTheoYeuCau();
                             break;
                         };
+           
+                 
                     case 8:
                         {
-                            var dsLop = new taoList();
-                            dsLop.Header = null;
-                            ds.xepSVTheoKhoa(ds, dsLop);
-
-                            break;
-                        };
-                    case 9:
-                        {
-                            var dsTotnghiep = new taoList();
-                            dsTotnghiep.Header = null;
-                            ds.xepSVDuDKTotNghiep(ds, dsTotnghiep);
-                            break;
-                        };
-                    case 10:
-                        {
-                            ds.BubbleSort();
+                            ds.menububblesort();
                             ds.xuatDS();
                             break;
                         }
-                    case 11:
-                        {
-                            ds.QuickSort();
-                            //ds.xuatSV(ds.Header.Data);
-                            
-                            ds.xuatDS();
-                            break;
-                        }
-                    case 12:
-                        {
-                            ds.HeapSort();
-                            
-                            ds.xuatDS();
-                            break;
-                        }
+                 
+                 
+                    //case 9:
+                    //    {
+                    //        using (StreamWriter a = new StreamWriter("doc.txt"))
+                    //        {
+                                
+                                
+                                    
+                    //                    var p = ds.Header;
+                    //                    while (p != null)
+                    //                    {
+                    //                        a.WriteLine(p.Data.IdSV);
+                    //                        a.WriteLine(p.Data.NameSV);
+                    //                        a.WriteLine(p.Data.Lop);
+                    //                        a.WriteLine(p.Data.NgayCTXH);
+                    //                        a.WriteLine(p.Data.TinChi);
+                    //                        a.WriteLine(p.Data.DiemLyThuyet);
+                    //                        a.WriteLine(p.Data.DiemThucHanh);
+                    //                        p = p.Next;
+                    //                    }
+                    //             Console.WriteLine("\nLưu file thành công");
+                    //             return;
+                    //        }
+                    //        break;
+                    //    }
                     default:
                         break;
                 }
-            } while (chon != 15);
+            } while (chon != 9);
+            
         }
     }
 }

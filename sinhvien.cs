@@ -15,7 +15,7 @@ namespace doAn3
         private string m_idSV;
         private string m_nameSV;
         private string m_lop;
-        private int m_ngayCTXH;
+        private double m_ngayCTXH;
         private int m_tinChi;
 
         private double m_diemLyThuyet;
@@ -24,10 +24,27 @@ namespace doAn3
         public string IdSV { get => m_idSV; set => m_idSV = value; }
         public string NameSV { get => m_nameSV; set => m_nameSV = value; }
         public string Lop { get => m_lop; set => m_lop = value; }
-        public int NgayCTXH { get => m_ngayCTXH; set => m_ngayCTXH = value; }
+        public double NgayCTXH { get => m_ngayCTXH; set => m_ngayCTXH = value; }
         public int TinChi { get => m_tinChi; set => m_tinChi = value; }
-        public double DiemLyThuyet { get => m_diemLyThuyet; set => m_diemLyThuyet = value; }
-        public double DiemThucHanh { get => m_diemThucHanh; set => m_diemThucHanh = value; }
+        public double DiemLyThuyet { get => m_diemLyThuyet; set
+            {
+                if (value < 0 || value > 10)
+                {  Console.WriteLine("\nNhập điểm không hợp lệ");
+                    m_diemLyThuyet = -1;
+            }else
+                    m_diemLyThuyet = value; } }
+        public double DiemThucHanh { get => m_diemThucHanh; set
+            {
+                if (value < 0 || value > 10)
+                {
+                    Console.WriteLine("\nNhập điểm không hợp lệ");
+                    m_diemThucHanh = -1;
+                }
+                else
+                    m_diemThucHanh = value;
+            }
+        }
+    
 
         public sinhvien(string idSV, string nameSV, string lop, int ngayCTXH, int tinChi, double diemLyThuyet, double diemThucHanh)
         {
@@ -52,21 +69,10 @@ namespace doAn3
 
         public int CompareTo(sinhvien other)
         {
-            // Thực hiện phép so sánh dựa trên tiêu chí của bạn và trả về kết quả.
-            // Ví dụ: so sánh theo m_idSV.
             return this.m_idSV.CompareTo(other.m_idSV);
         }
-        public void xuat()
-        {
-            Console.Write("Ma SV: " + IdSV);
-            Console.Write("Ten SV: " + NameSV);
-            Console.Write("Khoa: " + Lop);
-            Console.Write("So tin chi: " + TinChi);
-            Console.Write("Ngay CTXH: " + NgayCTXH);
-            Console.Write("Diem Ly thuyet: " + DiemLyThuyet);
-            Console.Write("Diem thuc hanh: " + DiemThucHanh);
-            Console.WriteLine();
-        }
+        public double diemTB { get => (DiemLyThuyet + DiemThucHanh) / 2; }
+     
     }
     
 
