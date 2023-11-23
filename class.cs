@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace doAn3
 {
-    public class Node<sinhvien> where sinhvien : IComparable<doAn3.sinhvien>
+    public class Node //where sinhvien : IComparable
         //public class Node<sinhvien> where sinhvien : IComparable
     {
         public doAn3.sinhvien Data { get; set; }
-        public Node<sinhvien> Next { get; set; }
+        public Node Next { get; set; }
         public Node()
         {
             Data = null;
@@ -26,16 +26,16 @@ namespace doAn3
             Next = null;
         }
     }
-    class taoList<sinhvien> where sinhvien : IComparable<doAn3.sinhvien>
+    class taoList//where sinhvien : IComparable<doAn3.sinhvien>
 
         //class taoList<sinhvien> where sinhvien : IComparable
     {
 
         public int dem = -1;
-        public Node<doAn3.sinhvien> Header { get; set; } = new Node<doAn3.sinhvien>();
+        public Node Header { get; set; } = new Node();
         public doAn3.sinhvien tmp = new doAn3.sinhvien();
 
-        public Node<doAn3.sinhvien> TimNode(string data)
+        public Node TimNode(string data)
         {
             var q = Header;
             var currentNode = Header;
@@ -49,7 +49,7 @@ namespace doAn3
             return null;
 
         }
-        public Node<doAn3.sinhvien> FindPrevious(string data)
+        public Node FindPrevious(string data)
         {
 
             var q = Header;
@@ -64,9 +64,9 @@ namespace doAn3
             return null;
 
         }
-        public Node<doAn3.sinhvien> Insert(doAn3.sinhvien data, doAn3.sinhvien afterValue)
+        public Node Insert(doAn3.sinhvien data, doAn3.sinhvien afterValue)
         {
-            var newNode = new Node<doAn3.sinhvien>(data);
+            var newNode = new Node(data);
             var currentNode = TimNode(afterValue.IdSV);
             if (currentNode != null)
             {
@@ -76,19 +76,19 @@ namespace doAn3
             }
             return null;
         }
-        public Node<sinhvien> Insert(doAn3.sinhvien data, Node<sinhvien> afterNode)
+        public Node Insert(doAn3.sinhvien data, Node afterNode)
         {
-            var newNode = new Node<sinhvien>(data)
+            var newNode = new Node(data)
             {
                 Next = afterNode.Next
             };
             afterNode.Next = newNode;
             return newNode;
         }
-        public Node<doAn3.sinhvien> addlast(doAn3.sinhvien data)
+        public Node addlast(doAn3.sinhvien data)
         {
             var p = Header;
-            var q = new Node<doAn3.sinhvien>(data);
+            var q = new Node(data);
             if (p == null)
             {
                 Header = q; // Nếu danh sách rỗng, thiết lập Header thành q
@@ -116,10 +116,10 @@ namespace doAn3
             //cay.Add(data);
             return q;
         }
-        public Node<doAn3.sinhvien> addfirst(doAn3.sinhvien data)
+        public Node addfirst(doAn3.sinhvien data)
         {
             var p = Header;
-            var q = new Node<doAn3.sinhvien>(data);
+            var q = new Node(data);
             if (p != null)
             {
                 q.Next = Header;
@@ -194,7 +194,7 @@ namespace doAn3
             Console.WriteLine($"| {"ID",10} | {"Name",20} | {"Lop",8} | {"TinChi",8} | {"NgayCTXH",10} | {"DiemLyThuyet",14} | {"DiemThucHanh",14} |");
             Console.WriteLine(new string('-', 106));
 
-            Node<doAn3.sinhvien> p = Header;
+            Node p = Header;
             while (p != null)
             {
                 xuatSV(p.Data);
@@ -203,7 +203,7 @@ namespace doAn3
             Console.WriteLine(new string('-', 106));
             Console.WriteLine();
         }
-        public void themSV(taoList<doAn3.sinhvien> ds)
+        public void themSV()
         {
             var a = new doAn3.sinhvien();
             Console.WriteLine(new string('-', 106));
@@ -226,7 +226,7 @@ namespace doAn3
 
 
 
-            ds.addlast(a);
+            addlast(a);
         }
         public void themNhieuSV()
         {
@@ -258,7 +258,7 @@ namespace doAn3
                 xuatDS();
             } while (a.IdSV != "exit");
         }
-        public void luuFile(string filename, taoList<doAn3.sinhvien> ds)
+        public void luuFile(string filename, taoList ds)
         {
             using (StreamWriter a = new StreamWriter(filename))
             {
@@ -288,7 +288,7 @@ namespace doAn3
                 
             }
         }
-        public void DocFile(string fileName, taoList<doAn3.sinhvien> ds)
+        public void DocFile(string fileName, taoList ds)
         {
             using (StreamReader r = new StreamReader(fileName))
             {
@@ -307,7 +307,7 @@ namespace doAn3
             }
         }
 
-        public void xepSVTheoKhoa(taoList<doAn3.sinhvien> ds, taoList<doAn3.sinhvien> lsTheoLop)
+        public void xepSVTheoKhoa(taoList ds, taoList lsTheoLop)
         {
             if (ds.Header != null) {
                 string lop;
@@ -327,7 +327,7 @@ namespace doAn3
                 Console.WriteLine("\nDanh sách sinh viên rỗng thao tác không được thực thi!!!");
             return;
         }
-        public void xepSVDuDKTotNghiep(taoList<doAn3.sinhvien> ds, taoList<doAn3.sinhvien> lsTotNghiep)
+        public void xepSVDuDKTotNghiep(taoList ds, taoList lsTotNghiep)
         {
             if (ds.Header != null)
             {
@@ -366,15 +366,15 @@ namespace doAn3
             do
             {
                 swapped = false;
-                Node<doAn3.sinhvien> current = Header;
-                Node<doAn3.sinhvien> prev = null;
+                Node current = Header;
+                Node prev = null;
 
                 while (current != null && current.Next != null)
                 {
                     if (current.Data.CompareTo(current.Next.Data) > 0)
                     {
                         // Hoán đổi dữ liệu của các nút
-                        Node<doAn3.sinhvien> temp = current.Next;
+                        Node temp = current.Next;
                         current.Next = temp.Next;
                         temp.Next = current;
 
@@ -403,18 +403,18 @@ namespace doAn3
             Header = QuickSort(Header);
         }
 
-        private Node<doAn3.sinhvien> QuickSort(Node<doAn3.sinhvien> head)
+        private Node QuickSort(Node head)
         {
             if (head.Data == null || head.Next == null)
                 return head;
 
             doAn3.sinhvien pivotValue = head.Data;
 
-            Node<doAn3.sinhvien> lesser = new Node<doAn3.sinhvien>();
-            Node<doAn3.sinhvien> equal = new Node<doAn3.sinhvien>();
-            Node<doAn3.sinhvien> greater = new Node<doAn3.sinhvien>();
+            Node lesser = new Node();
+            Node equal = new Node();
+            Node greater = new Node();
 
-            Node<doAn3.sinhvien> current = head;
+            Node current = head;
             while (current != null)
             {
                 int compareResult = current.Data.IdSV.CompareTo(pivotValue.IdSV);
@@ -441,7 +441,7 @@ namespace doAn3
 
         // Các phương thức hỗ trợ
 
-        private void InsertTail(Node<doAn3.sinhvien> list, doAn3.sinhvien data)
+        private void InsertTail(Node list, doAn3.sinhvien data)
         {
             if (list.Data != null)
             {
@@ -450,14 +450,14 @@ namespace doAn3
                 {
                     current = current.Next;
                 }
-                current.Next = new Node<doAn3.sinhvien>(data);
+                current.Next = new Node(data);
             }
             else
             {
                 list.Data = data;
             }
         }
-        private Node<doAn3.sinhvien> ConcatenateLists(Node<doAn3.sinhvien> a, Node<doAn3.sinhvien> b, Node<doAn3.sinhvien> c)
+        private Node ConcatenateLists(Node a, Node b, Node c)
         {
             if (a.Data == null && b.Data == null && c.Data == null)
             {
@@ -477,7 +477,7 @@ namespace doAn3
                 {
                     return b;
                 }
-                Node<doAn3.sinhvien> temp = b;
+                Node temp = b;
                 while (temp.Next != null)
                 {
                     temp = temp.Next;
@@ -485,7 +485,7 @@ namespace doAn3
                 temp.Next = c;
                 return b;
             }
-            Node<doAn3.sinhvien> tail = a;
+            Node tail = a;
             while (tail.Next != null)
             {
                 tail = tail.Next;
@@ -531,8 +531,8 @@ namespace doAn3
 
             for (int i = length - 1; i >= 0; i--)
             {
-                Node<doAn3.sinhvien> current = Header;
-                Node<doAn3.sinhvien> prev = null;
+                Node current = Header;
+                Node prev = null;
                 for (int j = 0; j < i; j++)
                 {
                     prev = current;
@@ -571,13 +571,13 @@ namespace doAn3
 
             if (largest != rootIndex)
             {
-                Node<doAn3.sinhvien> largestNode = FindNodeAtIndex(largest);
+                Node largestNode = FindNodeAtIndex(largest);
                 Swap(largestNode, FindNodeAtIndex(rootIndex));
 
                 Heapify(length, largest);
             }
         }
-        private Node<doAn3.sinhvien> FindNodeAtIndex(int index)
+        private Node FindNodeAtIndex(int index)
         {
             var current = Header;
             for (int i = 0; i < index; i++)
@@ -586,7 +586,7 @@ namespace doAn3
             }
             return current;
         }
-        private void Swap(Node<doAn3.sinhvien> a, Node<doAn3.sinhvien> b)
+        private void Swap(Node a, Node b)
         {
             doAn3.sinhvien temp = a.Data;
             a.Data = b.Data;

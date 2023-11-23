@@ -12,7 +12,7 @@ namespace doAn3
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
-            var ds = new taoList<doAn3.sinhvien>();
+            var ds = new taoList();
             ds.Header = null;
             int chon = 0;
             var SVtmp = new sinhvien();
@@ -44,7 +44,7 @@ namespace doAn3
                 {
                     case 1:
                         {
-                            ds.themSV(ds);
+                            ds.themSV();
                             ds.xuatDS();
                            
                             ds.luuFile("doc.txt",ds);
@@ -101,7 +101,7 @@ namespace doAn3
                         };
                     case 8:
                         {
-                            var dsLop = new taoList<doAn3.sinhvien>();
+                            var dsLop = new taoList();
                             dsLop.Header = null;
                             ds.xepSVTheoKhoa(ds, dsLop);
 
@@ -109,7 +109,7 @@ namespace doAn3
                         };
                     case 9:
                         {
-                            var dsTotnghiep = new taoList<doAn3.sinhvien>();
+                            var dsTotnghiep = new taoList();
                             dsTotnghiep.Header = null;
                             ds.xepSVDuDKTotNghiep(ds, dsTotnghiep);
                             break;
