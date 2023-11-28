@@ -25,7 +25,16 @@ namespace doAn3
         public string NameSV { get => m_nameSV; set => m_nameSV = value; }
         public string Lop { get => m_lop; set => m_lop = value; }
         public double NgayCTXH { get => m_ngayCTXH; set => m_ngayCTXH = value; }
-        public int TinChi { get => m_tinChi; set => m_tinChi = value; }
+        public int TinChi { get => m_tinChi; set
+            {
+                if (value < 0 )
+                {
+                    Console.WriteLine("\nNhập điểm không hợp lệ");
+                    m_tinChi = -1;
+                }
+                else
+                    m_tinChi = value;
+            } }
         public double DiemLyThuyet { get => m_diemLyThuyet; set
             {
                 if (value < 0 || value > 10)

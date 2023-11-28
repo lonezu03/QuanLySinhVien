@@ -30,8 +30,6 @@ namespace doAn3
     }
     public class List
     {
-
-        public int dem = -1;
         public Node Header { get; set; } = new Node();
         public  sinhvien tmp = new  sinhvien();
 
@@ -97,7 +95,6 @@ namespace doAn3
                 p.Next = q;
             }
             tmp = q.Data;
-            //cay.Add(data);
             return q;
             }
             catch (Exception)
@@ -121,6 +118,18 @@ namespace doAn3
             else
                 Header = q;
             return q;
+        }
+        public void XoaDanhSach(List ds)
+        {
+            Node p = ds.Header;
+            Node q;
+            while (p != null)
+            {
+                q = p.Next;
+                p = null; // Giải phóng từng nút
+                p = q;
+            }
+            ds.Header = null;//giải phóng header
         }
         private bool xetTrungmsv(string ma)
         {
@@ -153,12 +162,11 @@ namespace doAn3
                     } while (b != 'y' && b != 'n');
                     if (b == 'y')
                     {
-                        Console.Write("\n Nhập mã của sinh viên: ");
+                        Console.Write("\nNhập mã của sinh viên: ");
                         ma = Convert.ToString(Console.ReadLine());
                     }
                     else
                         return;
-
                 }
                 Remove(ma);
                 Console.Write("\nBạn có muốn xóa tiếp không (bất kì phím gì để tiếp tục,'n' để dừng lại): ");
@@ -225,20 +233,24 @@ namespace doAn3
         #region case 3 xuất ds sv
         public void xuatSV( sinhvien a)
         {
+            Console.WriteLine(new string('-', 113));
+            Console.WriteLine($"| {"ID",10} | {"Name",20} | {"Lop",8} | {"TinChi",8} | {"NgayCTXH",10} | {"DiemLyThuyet",14} | {"DiemThucHanh",14} |{"DiemTB",7}|");
+            Console.WriteLine(new string('-', 113));
             Console.WriteLine($"| {a.IdSV,10} | {a.NameSV,20} | {a.Lop,8} | {a.TinChi,8} | {a.NgayCTXH,10} | {a.DiemLyThuyet,14} | {a.DiemThucHanh,14} |{a.diemTB,7}|");
         }
         public void xuatDS()
         {
-
-            // Console.WriteLine("\nXuất danh sách đây:");
             Console.WriteLine(new string('-', 113));
-            Console.WriteLine($"| {"ID",10} | {"Name",20} | {"Lop",8} | {"TinChi",8} | {"NgayCTXH",10} | {"DiemLyThuyet",14} | {"DiemThucHanh",14} |{"DiemTB",7}|");
+            Console.WriteLine($"| {"ID",10} | {"Name",20} | {"Lop",8} | {"TinChi",8} |" +
+                $" {"NgayCTXH",10} | {"DiemLyThuyet",14} | {"DiemThucHanh",14} |{"DiemTB",7}|");
             Console.WriteLine(new string('-', 113));
 
             Node p = Header;
             while (p != null)
             {
-                xuatSV(p.Data);
+                Console.WriteLine($"| {p.Data.IdSV,10} | {p.Data.NameSV,20} | {p.Data.Lop,8} |" +
+                    $" {p.Data.TinChi,8} | {p.Data.NgayCTXH,10} | {p.Data.DiemLyThuyet,14} |" +
+                    $" {p.Data.DiemThucHanh,14} |{p.Data.diemTB,7}|");
                 p = p.Next;
             }
             Console.WriteLine(new string('-', 113));
@@ -254,7 +266,8 @@ namespace doAn3
                 do { 
                 var a = new sinhvien();
                 Console.WriteLine(new string('-', 113));
-                Console.WriteLine($"| {"ID",10} | {"Name",20} | {"Lop",8} | {"TinChi",8} | {"NgayCTXH",10} | {"DiemLyThuyet",14} | {"DiemThucHanh",14} |{"DiemTB",7}|");
+                Console.WriteLine($"| {"ID",10} | {"Name",20} | {"Lop",8} | {"TinChi",8} | {"NgayCTXH",10}" +
+                    $" | {"DiemLyThuyet",14} | {"DiemThucHanh",14} |{"DiemTB",7}|");
                 Console.WriteLine(new string('-', 113));
                 Console.Write("\n Nhập mã của sinh viên: ");
                 a.IdSV = Convert.ToString(Console.ReadLine());
@@ -263,7 +276,7 @@ namespace doAn3
                     char b;
                     do
                     {
-                        Console.WriteLine("\n------------------------- Mã số sinh viên bị trùng !!!------------------------------------------");
+                        Console.WriteLine("\n------------------------- Mã số sinh viên bị trùng !!!-");
                         Console.Write("\nBạn có muốn nhập lại không ('y'xác nhận 'n' không): ");
                         b = char.Parse(Console.ReadLine());
                     } while (b != 'y' && b != 'n');
@@ -274,68 +287,38 @@ namespace doAn3
                     }
                     else
                         return;
-
                 }
                 Console.Write("\n Nhập Tên của sinh viên: ");
                 a.NameSV = Convert.ToString(Console.ReadLine());
                 Console.Write("\n Nhập Lớp của sinh viên: ");
                 a.Lop = Convert.ToString(Console.ReadLine());
-                Console.Write("\n Nhập số ngày công tác xã hội chỉ sinh viên đã đạt đc: ");
+                Console.Write("\n Nhập số ngày công tác xã hội chỉ sinh viên đã đạt đc(số thực): ");
                 a.NgayCTXH = Convert.ToInt32(Console.ReadLine());
-                Console.Write("\n Nhập số tín chỉ sinh viên đã đạt đc: ");
+                Console.Write("\n Nhập số tín chỉ sinh viên đã đạt được(số nguyên): ");
                 a.TinChi = Convert.ToInt32(Console.ReadLine());
-                Console.Write("\n Nhập điểm lý thuyêt của sinh viên: ");
+                Console.Write("\n Nhập điểm lý thuyêt của sinh viên(số thực): ");
                 a.DiemLyThuyet = Convert.ToDouble(Console.ReadLine());
-                Console.Write("\n Nhập điểm thực hành của sinh viên: ");
+                Console.Write("\n Nhập điểm thực hành của sinh viên(số thực): ");
                 a.DiemThucHanh = Convert.ToDouble(Console.ReadLine());
                 addlast(a);
                 Node c = Header;
                 luuFile("doc.txt", c);
-                    Console.Write("\nBạn có muốn thêm tiếp không (bất kì phím gì để tiếp tục,'n' để dừng lại): ");
+                    xuatDS();
+                    Console.Write("\nBạn có muốn thêm tiếp không (bất kì kí tự gì để tiếp tục,'n' để dừng lại): ");
                     d=char.Parse(Console.ReadLine());
-                }while(d!='n');
-
+                    } while(d!='n');
         }
             catch (Exception)
             { return; }
 }
         #endregion
         #region case 2 thêm nhiều sv
-        //public void themNhieuSV()
-        //{
-        //    var a = new  sinhvien();
-        //    Console.WriteLine(new string('-', 113));
-        //    Console.WriteLine($"| {"ID",10} | {"Name",20} | {"Lop",8} | {"TinChi",8} | {"NgayCTXH",10} | {"DiemLyThuyet",14} | {"DiemThucHanh",14} |");
-        //    Console.WriteLine(new string('-', 113));
-        //    do
-        //    {
-        //        a = new  sinhvien();
-        //        Console.Write("\n Nhập mã của sinh viên(exit để thoát): ");
-        //        a.IdSV = Convert.ToString(Console.ReadLine());
-        //        if (a.IdSV == "exit")
-        //            break;
-        //        Console.Write("\n Nhập Tên của sinh viên: ");
-        //        a.NameSV = Convert.ToString(Console.ReadLine());
-        //        Console.Write("\n Nhập Lớp của sinh viên: ");
-        //        a.Lop = Convert.ToString(Console.ReadLine());
-        //        Console.Write("\n Nhập số ngày công tác xã hội chỉ sinh viên đã đạt đc: ");
-        //        a.NgayCTXH = Convert.ToInt32(Console.ReadLine());
-        //        Console.Write("\n Nhập số tín chỉ sinh viên đã đạt đc: ");
-        //        a.TinChi = Convert.ToInt32(Console.ReadLine());
-        //        Console.Write("\n Nhập điểm lý thuyêt của sinh viên: ");
-        //        a.DiemLyThuyet = Convert.ToDouble(Console.ReadLine());
-        //        Console.Write("\n Nhập điểm thực hành của sinh viên: ");
-        //        a.DiemThucHanh = Convert.ToDouble(Console.ReadLine());
-        //        addlast(a);
-
-        //        xuatDS();
-        //    } while (a.IdSV != "exit");
-        //}
+        
         #endregion
         #region lưu, đọc File
         public void luuFile(string filename, Node head)
-        {               
-            
+        {
+            try { 
             using (StreamWriter a = new StreamWriter(filename)) { 
            
                         var p = head;
@@ -350,13 +333,17 @@ namespace doAn3
                     a.WriteLine(p.Data.DiemThucHanh);
                     p = p.Next;
                 }
-                Console.WriteLine("\nLưu file thành công");
+                a.Close();
+                //Console.WriteLine("\nLưu file thành công");
                 return;
-               // a.Close();
             }
+            }
+            catch(Exception)
+            { return; }
         }
         public void DocFile(string fileName, List ds)
         {
+            try { 
             using (StreamReader r = new StreamReader(fileName))
             {
                 while (!r.EndOfStream)
@@ -371,6 +358,10 @@ namespace doAn3
                     a.DiemThucHanh = double.Parse(r.ReadLine());
                     ds.addlast(a);
                 }
+            }
+            }catch(Exception)
+            {
+                return;
             }
         }
         #endregion
@@ -399,16 +390,16 @@ namespace doAn3
                 Console.WriteLine(new string('-', 82));
                 Console.WriteLine("|{0,-80}|", "menu BubbleSort!!!");
                 Console.WriteLine(new string('-', 82));
-                Console.WriteLine("|{0,-80}|", "1. xắp sếp theo mã sinh viên");
-                Console.WriteLine("|{0,-80}|", "2.xắp sếp theo họ và tên sinh viên");
-                Console.WriteLine("|{0,-80}|", "3.xắp sếp theo lớpg");
-                Console.WriteLine("|{0,-80}|", "4.xắp sếp theo số ngày công tác xã hội đã đạt được");
-                Console.WriteLine("|{0,-80}|", "5.xắp sếp theo số tín chỉ đã hoàn thành");
-                Console.WriteLine("|{0,-80}|", "6.xắp sếp theo điểm trung bình tất cả môn lý thuyết của sinh viên");
-                Console.WriteLine("|{0,-80}|", "7.xắp sếp theo điểm trung bình tất cả môn thực hành của sinh viên");
-                Console.WriteLine("|{0,-80}|", "8.xắp sếp theo điểm trung bình tất cả môn thực hành và lý thuyết của sinh viên");
+                Console.WriteLine("|{0,-80}|", "1.Xắp sếp theo mã sinh viên");
+                Console.WriteLine("|{0,-80}|", "2.Xắp sếp theo họ và tên sinh viên");
+                Console.WriteLine("|{0,-80}|", "3.Xắp sếp theo lớp");
+                Console.WriteLine("|{0,-80}|", "4.Xắp sếp theo số ngày công tác xã hội đã đạt được");
+                Console.WriteLine("|{0,-80}|", "5.Xắp sếp theo số tín chỉ đã hoàn thành");
+                Console.WriteLine("|{0,-80}|", "6.Xắp sếp theo điểm trung bình tất cả môn lý thuyết của sinh viên");
+                Console.WriteLine("|{0,-80}|", "7.Xắp sếp theo điểm trung bình tất cả môn thực hành của sinh viên");
+                Console.WriteLine("|{0,-80}|", "8.Xắp sếp theo điểm trung bình tất cả môn thực hành và lý thuyết của sinh viên");
                 Console.WriteLine(new string('-', 82));
-                Console.WriteLine("\nBạn muốn xắp sếp theo thuộc tính nào của sinh viên ");
+                Console.Write("\nBạn muốn xắp sếp theo thuộc tính nào của sinh viên: ");
                 
                 chon = Convert.ToInt32(Console.ReadLine());
             } while (chon < 0 || chon > 8);
@@ -417,6 +408,7 @@ namespace doAn3
             {
                 Console.WriteLine("1. Chọn kiểu xếp từ bé đến lớn ");
                 Console.WriteLine("2. Chọn kiểu xếp từ lớn đến bé ");
+                 Console.WriteLine("\nNhập lựa chọn:");
 
                 chonKieuXep = Convert.ToInt32(Console.ReadLine());
 
@@ -847,12 +839,11 @@ namespace doAn3
         {
             string ma;
             Node sv=null;
-            Console.WriteLine("\n Nhập mã số sinh viên muốn tìm: ");
+            Console.WriteLine("\nNhập mã số sinh viên muốn tìm: ");
             ma = Console.ReadLine();
             if (TimNode(ma) != null)
             {
                 sv = TimNode(ma);
-                Console.WriteLine(sv.Data.NameSV);
                 return sv;
             }
             else
@@ -877,7 +868,7 @@ namespace doAn3
 
         #region case 7 lọc
         //case 7
-        public void locSVTheoKhoa(Node head, List lsTheoLop)
+        public void locVTheoLop(Node head, List lsTheoLop)
         {
             if (head != null)
             {
@@ -905,7 +896,7 @@ namespace doAn3
                 var p = head;
                 while (p != null)
                 {
-                    if (p.Data.NgayCTXH >= 10 && p.Data.TinChi >= 150)
+                    if (p.Data.NgayCTXH >= 10 && p.Data.TinChi >= 150&& p.Data.diemTB>=5)
                         lsTotNghiep.addlast(p.Data);
                     p = p.Next;
                 }
@@ -915,7 +906,6 @@ namespace doAn3
             }
             else
                 Console.WriteLine("\nDanh sách sinh viên rỗng thao tác không được thực thi!!!");
-
         }
         public void locTen(Node head,List dstheoTen)
         {
@@ -935,8 +925,6 @@ namespace doAn3
                         dstheoTen.addlast(p.Data);
                     p = p.Next;
                 }
-               // Console.WriteLine("\nDanh sách sinh viên lop " + lop + ": ");
-                //lsTheoLop.xuatDS();
             }
             else
                 Console.WriteLine("\nDanh sách sinh viên rỗng thao tác không được thực thi!!!");
@@ -947,7 +935,7 @@ namespace doAn3
             if (head != null)
             {
                 var p = head;
-                Console.Write("\nBạn chọn lọc theo sinh viên có điểm trung bình là giỏi (LT+TH)>8.5đ ");
+                Console.WriteLine("\nBạn chọn lọc theo sinh viên có điểm trung bình là giỏi (LT+TH)>8.5đ ");
 
                 while (p != null)
                 {
@@ -1043,7 +1031,7 @@ namespace doAn3
                     {
                         List dstemp=new List();
                         dstemp.init();
-                        locSVTheoKhoa(Header, dstemp);
+                        locVTheoLop(Header, dstemp);
                         dstemp.xuatDS();
                         XoaDanhSach(dstemp);
                         break;
@@ -1107,24 +1095,61 @@ namespace doAn3
                     {
                         break;
                     }
-
-
             }
         }
         #endregion
-        public void XoaDanhSach(List ds)
+       
+        public void suaSV()
         {
-            Node p = ds.Header;
-            Node q;
-
-            while (p != null)
+            char d = 'a';
+            do
             {
-                q = p.Next;
-                p = null; // Giải phóng từng nút
-                p = q;
-            }
-
-            ds.Header = null;//giải phóng header
+                Console.Write("\nNhập mã sinh viên mà bạn muốn chỉnh danh sách: ");
+                string ma = Console.ReadLine();
+                while (!xetTrungmsv(ma))
+                {
+                    char b;
+                    do
+                    {
+                        Console.Write("\nMã số sinh viên không tồn tại ");
+                        Console.Write("\nBạn có muốn nhập lại không ('y'xác nhận 'n' không): ");
+                        b = char.Parse(Console.ReadLine());
+                    } while (b != 'y' && b != 'n');
+                    if (b == 'y')
+                    {
+                        Console.Write("\nNhập mã của sinh viên: ");
+                        ma = Convert.ToString(Console.ReadLine());
+                    }
+                    else
+                        return;
+                }
+                Console.Write("\nĐã tìm thấy bắt đầu sửa thông tin sinh viên: ");
+                Node p = Header;
+                while(p!=null)
+                {
+                    if(p.Data.IdSV.CompareTo(ma)==0)
+                    {
+                        Console.Write("\nNhập Tên của sinh viên: ");
+                        p.Data.NameSV = Convert.ToString(Console.ReadLine());
+                        Console.Write("\nNhập Lớp của sinh viên: ");
+                        p.Data.Lop = Convert.ToString(Console.ReadLine());
+                        Console.Write("\nNhập số ngày công tác xã hội chỉ sinh viên đã đạt đc(số thực): ");
+                        p.Data.NgayCTXH = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("\nNhập số tín chỉ sinh viên đã đạt được(số nguyên): ");
+                        p.Data.TinChi = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("\nNhập điểm lý thuyêt của sinh viên(số thực): ");
+                        p.Data.DiemLyThuyet = Convert.ToDouble(Console.ReadLine());
+                        Console.Write("\nNhập điểm thực hành của sinh viên(số thực): ");
+                        p.Data.DiemThucHanh = Convert.ToDouble(Console.ReadLine());
+                    }
+                    p = p.Next;
+                }
+                Node luu = Header;
+                luuFile("doc.txt", luu);
+                xuatDS();
+                Console.Write("\nBạn có muốn sửa tiếp không (bất kì phím gì để tiếp tục,'n' để dừng lại): ");
+                d = char.Parse(Console.ReadLine());
+            } while (d != 'n');
         }
     }
 }

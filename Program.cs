@@ -26,9 +26,9 @@ namespace doAn3
                 Console.Write("MENU");
                 Console.WriteLine(new string('-', 60));
                 Console.WriteLine("|{0,-40}|{1,-60}|", "1.Thêm sinh viên", "5.Lọc danh sách sinh viên");
-                Console.WriteLine("|{0,-40}|{1,-60}|", "2.Xem danh sách sinh viên", "6.Sắp xếp tăng dần theo MSSV(Bubble sort)");
-                Console.WriteLine("|{0,-40}|{1,-60}|", "3.Xóa sinh viên khỏi danh sách sinh viên", "7.Thoát menu");
-                Console.WriteLine("|{0,-40}|{1,-60}|", "4.Tìm kiếm sinh viên bằng mssv", "");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "2.Xem danh sách sinh viên", "6.Sắp xếp sinh viên (Bubble sort)");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "3.Xóa sinh viên khỏi danh sách sinh viên", "7.sửa thông tin sinh viên");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "4.Tìm kiếm sinh viên bằng mssv", "8. Thoát");
                 Console.WriteLine(new string('-', 103));
                 //Console.WriteLine("13.Độ dài của danh sách: ");
                 Console.Write("\nNhập lựu chọn: ");
@@ -42,8 +42,8 @@ namespace doAn3
                     case 1:
                         {
                             ds.themSV();
-                           // ds.xuatSV(ds.Header.Data);
-                            ds.xuatDS();
+                        
+                            
                             break;
                         };
                     case 2:
@@ -77,20 +77,18 @@ namespace doAn3
                         {
                     ds.menububblesort();
                     ds.xuatDS();
-                    //ds.luuFile("doc.txt", ds.Header);
                     break;
 
                 };
-                
-                    
-                 
-                 
-                  
-                  
+                    case 7:
+                        {
+                            ds.suaSV();
+                            break;
+                        }
                     default:
                         break;
                 }
-            } while (chon != 7);
+            } while (chon != 8);
             
         }
     }
