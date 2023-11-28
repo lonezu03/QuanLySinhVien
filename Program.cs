@@ -14,7 +14,7 @@ namespace doAn3
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
             var ds = new List();
-            ds.Header = null;
+            ds.init();
             int chon = 0;
             var SVtmp = new sinhvien();
             ds.DocFile("doc.txt", ds);
@@ -25,14 +25,13 @@ namespace doAn3
                 Console.Write(new string('-', 39));
                 Console.Write("MENU");
                 Console.WriteLine(new string('-', 60));
-                Console.WriteLine("|{0,-40}|{1,-60}|", "1.Thêm sinh viên", "6.Tìm kiếm sinh viên bằng mssv");
-                Console.WriteLine("|{0,-40}|{1,-60}|", "2.Thêm nhiều sinh viên", "7.Lọc danh sách sinh viên");
-                Console.WriteLine("|{0,-40}|{1,-60}|", "3.Xem danh sách sinh viên", "8.Sắp xếp tăng dần theo MSSV(Bubble sort)");
-                Console.WriteLine("|{0,-40}|{1,-60}|", "4.Lưu file!!", "9.Thoát menu");
-                Console.WriteLine("|{0,-40}|{1,-60}|", "5.Xóa sinh viên khỏi danh sách sinh viên", "");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "1.Thêm sinh viên", "5.Lọc danh sách sinh viên");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "2.Xem danh sách sinh viên", "6.Sắp xếp tăng dần theo MSSV(Bubble sort)");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "3.Xóa sinh viên khỏi danh sách sinh viên", "7.Thoát menu");
+                Console.WriteLine("|{0,-40}|{1,-60}|", "4.Tìm kiếm sinh viên bằng mssv", "");
                 Console.WriteLine(new string('-', 103));
                 //Console.WriteLine("13.Độ dài của danh sách: ");
-                Console.Write("\nNhap lựu chọn: ");
+                Console.Write("\nNhập lựu chọn: ");
                 int pre = 0;
                 if (chon != 0)
                     pre = chon;
@@ -43,86 +42,55 @@ namespace doAn3
                     case 1:
                         {
                             ds.themSV();
-                            ds.xuatSV(ds.Header.Data);
+                           // ds.xuatSV(ds.Header.Data);
                             ds.xuatDS();
                             break;
                         };
                     case 2:
                         {
-                            ds.themNhieuSV();
+                            ds.xuatDS();
                             break;
                         }
                     case 3:
                         {
-                            ds.xuatDS();
+                            ds.xoaSV();
                             break;
                         };
                     case 4:
                         {
-                            ds.luuFile("doc.txt", ds.Header);
-                            break;
-                        };
-                    case 5:
-                        {
-                            ds.Remove();
-                            ds.luuFile("doc.txt", ds.Header);
-                            break;
-                        };
-                    case 6:
-                        {
-                            
-                            Node sv=ds.timsv();
-                            if (sv == null)
-                                Console.WriteLine("\nDanh sách không có sinh viên mà bạn cần tìm");
-                            else {
+                            Node sv = ds.timsv();
+                            if (sv != null)
+                            {
                                 Console.WriteLine("\nSinh Viên bạn cần tìm là: ");
                                 ds.xuatSV(sv.Data);
                             }
                             break;
                         };
-                    case 7:
+                    case 5:
                         {
                             ds.locSinhVienTheoYeuCau();
                             break;
-                        };
-           
-                 
-                    case 8:
+                        
+
+                };
+                    case 6:
                         {
-                            ds.menububblesort();
-                            ds.xuatDS();
-                            break;
-                        }
+                    ds.menububblesort();
+                    ds.xuatDS();
+                    //ds.luuFile("doc.txt", ds.Header);
+                    break;
+
+                };
+                
+                    
                  
                  
-                    //case 9:
-                    //    {
-                    //        using (StreamWriter a = new StreamWriter("doc.txt"))
-                    //        {
-                                
-                                
-                                    
-                    //                    var p = ds.Header;
-                    //                    while (p != null)
-                    //                    {
-                    //                        a.WriteLine(p.Data.IdSV);
-                    //                        a.WriteLine(p.Data.NameSV);
-                    //                        a.WriteLine(p.Data.Lop);
-                    //                        a.WriteLine(p.Data.NgayCTXH);
-                    //                        a.WriteLine(p.Data.TinChi);
-                    //                        a.WriteLine(p.Data.DiemLyThuyet);
-                    //                        a.WriteLine(p.Data.DiemThucHanh);
-                    //                        p = p.Next;
-                    //                    }
-                    //             Console.WriteLine("\nLưu file thành công");
-                    //             return;
-                    //        }
-                    //        break;
-                    //    }
+                  
+                  
                     default:
                         break;
                 }
-            } while (chon != 9);
+            } while (chon != 7);
             
         }
     }
